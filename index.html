@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE 채팅방 배경화면 사용 데이터 분석 | 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+            background: white;
+            color: #1a1a1a;
+            line-height: 1.65;
+        }
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 40px 20px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .header .subtitle {
+            font-size: 15px;
+            color: #666;
+            font-weight: 400;
+        }
+        .nav {
+            background: #fafafa;
+            padding: 12px 20px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 6px 12px;
+            transition: color 0.2s;
+        }
+        .nav a:hover {
+            color: #1a1a1a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section {
+            margin-bottom: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .section-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        .ranking-thumbnail {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #e5e5e5;
+            display: block;
+            margin: 0 auto;
+        }
+        .ranking-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .ranking-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        .ranking-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .ranking-row-item {
+            text-align: center;
+        }
+        .ranking-row-item .ranking-number {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        @media (max-width: 1024px) {
+            .ranking-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .ranking-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .insight-box {
+            background: #f8f8f8;
+            border-left: 3px solid #1a1a1a;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .insight-box h3 {
+            color: #1a1a1a;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .insight-box p {
+            color: #444;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .seasonal-row {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .seasonal-item {
+            flex: 1;
+            min-width: 250px;
+        }
+        .seasonal-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .seasonal-images {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .seasonal-images {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: flex-start;
+        }
+        .seasonal-images img {
+            width: 200px;
+            height: auto;
+            border: 1px solid #e5e5e5;
+        }
+        .regional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .regional-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 24px;
+        }
+        .regional-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+        .regional-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .regional-images img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e5e5e5;
+        }
+        .worst-grid {
+            margin: 30px 0;
+        }
+        .worst-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .worst-item {
+            text-align: center;
+        }
+        .worst-item .ranking-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 6px;
+        }
+        .worst-item img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #e5e5e5;
+            display: block;
+            margin: 0 auto;
+        }
+        .footer {
+            background: #fafafa;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .footer p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 16px 0;
+        }
+        li {
+            margin: 8px 0;
+            color: #444;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        li strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .section-title { font-size: 20px; }
+            .regional-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>LINE 채팅방 배경화면 데이터 분석</h1>
+        <div class="subtitle">2026년 1월·4월 실사용 데이터 기반 인사이트</div>
+    </div>
+
+    <nav class="nav">
+        <a href="#rankings-jan">1월 순위</a>
+        <a href="#rankings-apr">4월 순위</a>
+        <a href="#seasonal">계절적 특성</a>
+        <a href="#regional">나라별 특성</a>
+        <a href="#worst">WORST 20</a>
+        <a href="#insights">핵심 인사이트</a>
+        <a href="#renewal">리뉴얼 목표</a>
+        <a href="#specification">제작 의뢰서</a>
+        <a href="#examples">제안 예시</a>
+    </nav>
+
+    <div class="container">
+        <section id="rankings-jan" class="section">
+            <h2 class="section-title">1. 2026년 1월 순위 (겨울)</h2>
+            <p class="section-description">
+                겨울 시즌 배경화면 사용 현황 - 눈 내리는 장면 등 계절감 강한 디자인이 순위권 진입
+            </p>
+
+            <div class="ranking-card">
+                <h3>🌍 Global TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_gradation_9__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_gradation_1__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_40__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_6__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_gradation_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇯🇵 JP TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_gradation_9__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_gradation_1__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_simple_16__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_gradation_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_40__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_simple_4__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇹🇭 TH TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_30__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_35__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_3__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_6__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_38__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_34__B_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇹🇼 TW TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_40__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_31__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_6__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_38__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_gradation_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="rankings-apr" class="section">
+            <h2 class="section-title">2. 2026년 4월 순위 (봄)</h2>
+            <p class="section-description">
+                봄 시즌 배경화면 사용 현황 - 벚꽃 풍경이 급상승하며 계절성 콘텐츠의 명확한 수요 입증
+            </p>
+
+            <div class="ranking-card">
+                <h3>🌍 Global TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_30__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_gradation_9__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_gradation_1__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_35__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_3__B_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇯🇵 JP TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_gradation_1__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_gradation_9__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_gradation_3__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_simple_16__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_gradation_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇹🇭 TH TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_30__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_35__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_6__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_simple_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_31__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_34__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_38__A_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3>🇹🇼 TW TOP 10</h3>
+                <div class="ranking-row">
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_2__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_41__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_31__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_39__A_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_3__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_6__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_simple_16__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_gradation_5__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_30__B_1.png" class="ranking-thumbnail">
+                    </div>
+                    <div class="ranking-row-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_35__B_1.png" class="ranking-thumbnail">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="seasonal" class="section">
+            <h2 class="section-title">3. 계절적 특성 분석</h2>
+            <p class="section-description">
+                1월(겨울)과 4월(봄)의 순위 변화를 통한 계절별 선호도 패턴 분석
+            </p>
+
+            <div class="seasonal-row">
+                <div class="seasonal-item">
+                    <h4>❄️ 겨울 순위권 (1월)</h4>
+                    <ul>
+                        <li>눈 내리는 장면 같은 계절감이 강한 디자인들이 상위권에 위치</li>
+                        <li>크리스마스 트리 (대만only) 같은 겨울 시즌 요소 존재</li>
+                        <li>하지만 최상위권(Top 5)은 여전히 핑크 계열 단색/그라데이션이 지배</li>
+                    </ul>
+                    <div class="seasonal-images">
+                        <img src="images/skin_40__A_1.png" alt="겨울 배경">
+                    </div>
+                </div>
+
+                <div class="seasonal-item">
+                    <h4>🌸 봄 순위권 (4월)</h4>
+                    <ul>
+                        <li>벚꽃 풍경이 급상승 - 계절성 콘텐츠의 명확한 수요</li>
+                        <li>겨울 관련 디자인들이 순위에서 사라짐</li>
+                        <li>범계절적 심플 디자인(핑크 단색)은 사계절 내내 1위 유지</li>
+                    </ul>
+                    <div class="seasonal-images">
+                        <img src="images/skin_39__A_1.png" alt="벚꽃 배경">
+                        <img src="images/skin_30__B_1.png" alt="봄 배경">
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h3>💡 핵심 인사이트</h3>
+                <p>
+                    계절별 특화 배경화면은 명확한 수요가 있지만, <strong>범계절적 심플 디자인(핑크 단색)은 사계절 내내 1위 유지</strong>.
+                    하이브리드 전략 필요: <strong>베이스는 시즌리스, 시즌 한정 특별판 병행 출시</strong>
+                </p>
+            </div>
+        </section>
+
+        <section id="regional" class="section">
+            <h2 class="section-title">4. 나라별 특성 분석</h2>
+            <p class="section-description">
+                일본(JP), 태국(TH), 대만(TW) 각 지역별 배경화면 선호도와 특성을 심층 분석
+            </p>
+
+            <div class="regional-grid">
+                <div class="regional-card">
+                    <h4>🇯🇵 JP - 미니멀, 그라데이션</h4>
+                    <p style="font-size: 14px; color: #555; margin: 16px 0;">
+                        일본 유저들은 화면에 글자나 아이콘이 가려지는 것을 기피합니다.
+                        <strong>단색에 가까운 심플한 디자인</strong>이 차트를 독점하고 있습니다.
+                    </p>
+                    <div class="regional-images">
+                        <img src="images/skin_simple_5__B_1.png">
+                        <img src="images/skin_gradation_9__B_1.png">
+                        <img src="images/skin_gradation_1__B_1.png">
+                        <img src="images/skin_gradation_5__B_1.png">
+                    </div>
+                    <div class="insight-box">
+                        <h3>디자인 인사이트</h3>
+                        <p>
+                            <strong>캐릭터를 과감히 빼거나 구석에 아주 작게 배치</strong>하고,
+                            은은한 색감(특히 <strong>핑크/라벤더 계열</strong>)에 올인
+                        </p>
+                    </div>
+                </div>
+
+                <div class="regional-card">
+                    <h4>🇹🇭 TH - 캐릭터, 밝은 색상</h4>
+                    <p style="font-size: 14px; color: #555; margin: 16px 0;">
+                        태국 유저들은 <strong>'스토리 중심의 귀여운 일러스트'</strong>를 압도적으로 선호합니다.
+                        라인 캐릭터가 주인공으로 활약하는 테마들이 유독 강세입니다.
+                    </p>
+                    <div class="regional-images">
+                        <img src="images/skin_30__B_1.png">
+                        <img src="images/skin_39__A_1.png">
+                        <img src="images/skin_35__B_1.png">
+                        <img src="images/skin_3__B_1.png">
+                    </div>
+                    <div class="insight-box">
+                        <h3>디자인 인사이트</h3>
+                        <p>
+                            <strong>"귀여운 캐릭터가 눈에 잘 띄는가"</strong>가 핵심.
+                            <strong>라인프렌즈 IP의 매력을 극대화</strong>한 일러스트 레이아웃 필요
+                        </p>
+                    </div>
+                </div>
+
+                <div class="regional-card">
+                    <h4>🇹🇼 TW - 계절성, 일러스트</h4>
+                    <p style="font-size: 14px; color: #555; margin: 16px 0;">
+                        대만 유저들은 글로벌 트렌드와 흐름을 같이 하면서도, <strong>계절의 변화나 자연적인 요소</strong>(식물, 꽃, 그린 컬러)에
+                        유독 민감하게 반응하는 성향을 보입니다.
+                    </p>
+                    <div class="regional-images">
+                        <img src="images/skin_41__A_1.png">
+                        <img src="images/skin_39__A_1.png">
+                        <img src="images/skin_31__B_1.png">
+                        <img src="images/skin_40__A_1.png">
+                    </div>
+                    <div class="insight-box">
+                        <h3>디자인 인사이트</h3>
+                        <p>
+                            <strong>계절 테마를 한발 빠르게 출시하는 전략</strong>이 유효.
+                            <strong>그리너리(Greenery) 색감</strong>이나 감성적인 일러스트가 잘 통함
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="worst" class="section">
+            <h2 class="section-title">5. WORST 20 분석 (1월, 4월 합친 순위)</h2>
+            <div class="insight-box" style="background: #fff3e0; border-left-color: #ff9800;">
+                <h3 style="color: #e65100;">⚠️ 핵심 문제점</h3>
+                <p style="color: #333;">
+                    <strong>LINE 유저의 핵심 본질인 'IP(캐릭터) 중심의 소비 성향'과
+                    '메신저 UI 환경'을 고려하지 못한 기획적 미스매치</strong>가 원인
+                </p>
+            </div>
+
+            <div style="margin: 40px 0;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">1. LINE 유저의 핵심 니즈 간과</h3>
+                <p style="font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 20px;">
+                    배경을 직접 변경하는 고관여 유저들은 대다수 <strong>'라인프렌즈 캐릭터를 보기 위한 목적'</strong>이 강함.
+                    캐릭터 요소가 배제되거나 인지도가 낮은 일러스트는 <strong>'명분과 매력'이 부족</strong>
+                </p>
+
+                <h3 style="font-size: 16px; font-weight: 600; margin: 30px 0 16px;">2. 높은 시각적 밀도로 인한 가독성 간섭</h3>
+                <p style="font-size: 14px; color: #555; line-height: 1.8;">
+                    <strong>화면 전체를 채우는 전면 패턴</strong>이나 <strong>중앙 집중형 대형 그래픽</strong>은
+                    말풍선, 텍스트, 키보드와 겹치면서 <strong>'가독성과 시인성'을 저해</strong>
+                </p>
+            </div>
+
+            <div class="worst-grid">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">WORST 1-10 (가장 인기 없는 순)</h3>
+                <div class="worst-row">
+                    <div class="worst-item">
+                        <div class="ranking-number">1</div>
+                        <img src="images/skin_24__A_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">2</div>
+                        <img src="images/skin_23__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">3</div>
+                        <img src="images/skin_18__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">4</div>
+                        <img src="images/skin_22__A_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">5</div>
+                        <img src="images/skin_20__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">6</div>
+                        <img src="images/skin_19__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">7</div>
+                        <img src="images/skin_17__A_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">8</div>
+                        <img src="images/skin_21__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">9</div>
+                        <img src="images/skin_15__A_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">10</div>
+                        <img src="images/skin_14__B_1.png">
+                    </div>
+                </div>
+
+                <h3 style="font-size: 16px; font-weight: 600; margin: 30px 0 20px;">WORST 11-20</h3>
+                <div class="worst-row">
+                    <div class="worst-item">
+                        <div class="ranking-number">11</div>
+                        <img src="images/skin_simple_12__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">12</div>
+                        <img src="images/skin_36__A_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">13</div>
+                        <img src="images/skin_simple_11__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">14</div>
+                        <img src="images/skin_simple_2__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">15</div>
+                        <img src="images/skin_simple_7__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">16</div>
+                        <img src="images/skin_simple_1__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">17</div>
+                        <img src="images/skin_11__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">18</div>
+                        <img src="images/skin_10__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">19</div>
+                        <img src="images/skin_simple_10__B_1.png">
+                    </div>
+                    <div class="worst-item">
+                        <div class="ranking-number">20</div>
+                        <img src="images/skin_13__A_1.png">
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="background: #e3f2fd; border-left-color: #1976d2; margin-top: 40px;">
+                <h3 style="color: #0d47a1;">✅ 그래픽팀 제안 방향성</h3>
+                <p style="color: #333; margin-bottom: 20px;">
+                    유저들은 <strong>'확실한 캐릭터성'</strong> 혹은 <strong>'UI를 방해하지 않는 확실한 미니멀함'</strong> 중 하나를 선택하는 경향이 뚜렷
+                </p>
+
+                <div style="margin-bottom: 20px;">
+                    <p style="color: #333; margin-bottom: 8px;"><strong>①</strong> <strong>[가독성을 배려한 레이아웃 설계]를 최우선으로</strong></p>
+                    <p style="color: #666; font-size: 13px; margin-left: 20px;">메신저 UI와의 조화를 고려한 디자인</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <p style="color: #333; margin-bottom: 8px;"><strong>②</strong> <strong>[라인프렌즈 인기 캐릭터 중심의 배치]로 기획 방향 제한</strong></p>
+                    <p style="color: #666; font-size: 13px; margin-left: 20px;">IP 매력을 극대화한 전략</p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <p style="color: #333; margin-bottom: 8px;"><strong>③</strong> <strong>디자인의 시각적 밀도를 한 단계 낮추어 제작</strong></p>
+                    <p style="color: #666; font-size: 13px; margin-left: 20px;">과도한 요소 배제, 여백 확보</p>
+                </div>
+
+                <div style="margin-bottom: 0;">
+                    <p style="color: #333; margin-bottom: 12px;"><strong>④</strong> <strong>단색(Simple) 배경 제작 시 주의사항</strong></p>
+                    <p style="color: #666; font-size: 13px; margin-left: 20px; margin-bottom: 12px;">단색 배경은 명확한 색상 정체성이 필수입니다.</p>
+
+                    <div style="margin-left: 20px; padding: 12px; background: #f0f9ff; border-left: 2px solid #0ea5e9; margin-bottom: 10px;">
+                        <p style="color: #0c4a6e; font-size: 13px; margin-bottom: 6px;"><strong>✅ 권장: 파스텔 톤 (명도 85% 이상 + 채도 25% 이하)</strong></p>
+                        <ul style="margin: 8px 0 0 16px; padding: 0;">
+                            <li style="color: #0c4a6e; font-size: 13px; margin: 4px 0;">밝고 부드러운 색감으로 가독성 우수</li>
+                            <li style="color: #0c4a6e; font-size: 13px; margin: 4px 0;">성공 사례: 연핑크 계열 (TOP 3 진입)</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-left: 20px; padding: 12px; background: #fef2f2; border-left: 2px solid #ef4444;">
+                        <p style="color: #7f1d1d; font-size: 13px; margin-bottom: 6px;"><strong>❌ 피해야 할 영역: 중간 톤 (명도 60-75% + 채도 20-40%)</strong></p>
+                        <ul style="margin: 8px 0 0 16px; padding: 0;">
+                            <li style="color: #7f1d1d; font-size: 13px; margin: 4px 0;">밝지도 어둡지도 않은 애매한 톤</li>
+                            <li style="color: #7f1d1d; font-size: 13px; margin: 4px 0;">탁하고 생기 없어 보이는 느낌</li>
+                            <li style="color: #7f1d1d; font-size: 13px; margin: 4px 0;">WORST 20 중 6개(30%)가 이 영역에 해당</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insights" class="section">
+            <h2 class="section-title">6. 종합 인사이트 및 제안</h2>
+            <div class="insight-box">
+                <h3>📊 데이터 기반 결론</h3>
+                <p>
+                    LINE 채팅방 배경화면은 <strong>"심플함과 캐릭터성의 균형"</strong>이 핵심.
+                    유저들은 메신저 본연의 가독성을 해치지 않으면서도, 자신의 개성과 취향을 표현할 수 있는 배경을 선호.
+                    향후 제작 시 <strong>지역별 특성과 계절성을 고려한 맞춤형 전략</strong>이 필요하며,
+                    라인프렌즈 IP를 효과적으로 활용하되 <strong>UI 가독성을 최우선</strong>으로 고려해야 함.
+                </p>
+            </div>
+        </section>
+
+        <section id="renewal" class="section">
+            <h2 class="section-title">7. 2026 LINE 채팅방 배경 리뉴얼 목표</h2>
+            <p class="section-description">
+                사용자가 채팅 맥락에 맞는 배경을 더 쉽게 선택하고, 말풍선 가독성을 해치지 않으면서 감성·개성·야간 사용성을 강화한다.
+            </p>
+
+            <div class="ranking-card">
+                <h3 style="font-size: 14px;">1. 전략 키워드</h3>
+                <p style="font-size: 13px; font-weight: 600; color: #1a1a1a; margin: 16px 0;">Readable / Calm / Personal / Mode-aware</p>
+                <ul style="margin: 12px 0; font-size: 13px;">
+                    <li><strong>Readable:</strong> 말풍선과 텍스트가 항상 잘 보여야 함</li>
+                    <li><strong>Calm:</strong> 장시간 채팅해도 피로하지 않은 색감</li>
+                    <li><strong>Personal:</strong> 사용자가 취향을 표현할 수 있어야 함</li>
+                    <li><strong>Mode-aware:</strong> 라이트/다크 사용 환경 대응</li>
+                </ul>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">2. 카테고리 개선 제안</h3>
+
+                <h4 style="font-size: 13px; font-weight: 600; margin: 16px 0;">Before: 현재 구조 (3개)</h4>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px;">
+                    <thead style="background: #f2f7ff;">
+                        <tr>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">카테고리</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">개수</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">설명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Illustrations</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">34개</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">모든 것 혼재</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Colors</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">24개</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">단색/그라데이션</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Your photos</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">유저 업로드</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="font-size: 13px; font-weight: 600; margin: 24px 0 16px; color: #3c6;">After: 개선안 (4-5개)</h4>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px;">
+                    <thead style="background: #f2f7ff;">
+                        <tr>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">카테고리</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">개수</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">설명</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Illustrations & Character<br>(+Photos)</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">14개<br>(+5-6개)</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">LINE 캐릭터 중심 / 계절감 일러스트 추가<br>(블러/감성 실사)</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">개선</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Colors + Gradients</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">21개</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">단색 + 은은한 텍스처 / 부드러운 컬러 전환</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">개선</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Dark mode</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">9개</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">저조도/야간 최적화</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">NEW</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">Your photos</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">유저 업로드</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">-</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">기존 유지</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <ul style="margin: 24px 0; font-size: 13px;">
+                    <li>사용자 만족도 향상</li>
+                    <li>배경 사용률 증가 (다양성 확보)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="specification" class="section">
+            <h2 class="section-title">8. 2026 LINE 채팅방 배경 그래픽 제작 의뢰서</h2>
+            <p class="section-description">
+                사용자가 채팅 맥락에 맞는 배경을 더 쉽게 선택하고, 말풍선 가독성을 해치지 않으면서 감성·개성·야간 사용성을 강화한다.
+            </p>
+
+            <div class="ranking-card">
+                <h3 style="font-size: 14px;">기본 스펙</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px;">
+                    <thead style="background: #f2f7ff;">
+                        <tr>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">항목</th>
+                            <th style="padding: 10px 12px; text-align: left; font-weight: 700; border: 1px solid #e5e5e5;">사양</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">이미지 크기</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">1080 × 1548px</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">파일 포맷</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">JPEG</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">파일 용량</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">500KB 이하</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">색 공간</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">sRGB</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">해상도</td>
+                            <td style="padding: 10px 12px; border: 1px solid #e5e5e5; color: #666;">@2x</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">가독성 가이드라인</h3>
+                <ul style="margin: 12px 0; font-size: 13px;">
+                    <li>Readable: 말풍선과 텍스트가 잘 보여야 함</li>
+                    <li>Calm: 장시간 채팅해도 피로하지 않은 색감</li>
+                    <li>Mode-aware: 라이트/다크 사용 환경 대응</li>
+                    <li>제안: 명도 대비 40% 이상, 채도 70% 이하</li>
+                    <li>금지: 밝은 흰색, 고대비 패턴, 네온 컬러</li>
+                </ul>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">Category 1: Illustrations & Character (14개)</h3>
+                <p style="color: #808080; font-size: 13px; margin-top: 10px;">
+                    LINE 공식 캐릭터를 활용한 배경 - LINE 정체성 강화. 캐릭터팬용이지만 가독성을 고려하는 것이 필요. 파스텔톤+라인캐릭터조합이 핵심
+                </p>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">Category 1_1: Photos (5-6개)</h3>
+                <p style="color: #666; font-size: 13px; margin-top: 10px;">
+                    자연 풍경 및 계절감 있는 실사 이미지 - 감성 보완용. 사용률 목표는 낮게 잡되 다양성 확보. 블러 처리 필수
+                </p>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">Category 2: Colors & Gradient (21개)</h3>
+                <p style="color: #666; font-size: 13px; margin-top: 10px;">
+                    깔끔한 단색 및 부드러운 그라데이션 배경 / JP에서 가장 실사용률 높은 기본군. 리뉴얼의 핵심. (은은한 파스텔톤이 인기가 좋음)<br>
+                    단색 + 은은한 텍스처 (10) / 부드러운 컬러 전환 (8)
+                </p>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 30px;">
+                <h3 style="font-size: 14px;">Category 3: Dark (9개)</h3>
+
+                <h4 style="font-size: 13px; font-weight: 600; margin: 16px 0;">추가 이유:</h4>
+                <ul style="margin: 10px 0; font-size: 13px;">
+                    <li>야간 사용 50% (오후 9시~새벽 2시) - 야간 사용자 경험 개선</li>
+                    <li>OLED 배터리 10-15% 절약</li>
+                    <li>iOS/Android 시스템 레벨 Darkmode 지원 - 트렌드 반영</li>
+                    <li>경쟁사 제공 (Whats app)</li>
+                </ul>
+
+                <h4 style="font-size: 13px; font-weight: 600; margin: 16px 0;">디자인 방향:</h4>
+                <ul style="margin: 10px 0; font-size: 13px;">
+                    <li>명도 15-30%, 채도 20-40%</li>
+                    <li>타입: 라인 캐릭터 5개, 그라데이션 2개, 자연/우주 2개</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="examples" class="section">
+            <h2 class="section-title">9. LINE 채팅방 배경 제안 예시 - 카테고리별</h2>
+
+            <div class="ranking-card" style="margin-bottom: 40px;">
+                <h3 style="font-size: 14px;">LINE 채팅방 배경 선택 UI</h3>
+
+                <div style="margin-top: 24px;">
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">AS IS</h4>
+                        <p style="color: #808080; font-size: 13px; margin-bottom: 16px;">현재 카테고리 Illustrations / Color 2가지 + 유저선택 사진</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <img src="images/figma_as_is_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                            <img src="images/figma_as_is_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                            <img src="images/figma_as_is_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">TO BE</h4>
+                        <p style="color: #808080; font-size: 13px; margin-bottom: 16px;">카테고리 Illustrations(+Photos)/ Color / Darkmode 3가지 + 유저선택 사진</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <img src="images/figma_to_be_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                            <img src="images/figma_to_be_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                            <img src="images/figma_to_be_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ranking-card">
+                <h3 style="font-size: 14px;">Illustrations & Character</h3>
+                <p style="color: #808080; font-size: 13px; margin: 10px 0 16px;">
+                    LINE 공식 캐릭터를 활용한 배경 - LINE 정체성 강화. 캐릭터팬용이지만 가독성을 고려하는 것이 필요. 파스텔톤 or 저채도 +라인캐릭터조합이 핵심
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <img src="images/figma_illust_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_illust_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_illust_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_illust_4.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_illust_5.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_illust_6.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                </div>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 40px;">
+                <h3 style="font-size: 14px;">Colors & Gradient</h3>
+                <p style="color: #808080; font-size: 13px; margin: 10px 0 16px;">
+                    깔끔한 단색 및 부드러운 그라데이션 배경 / JP에서 가장 실사용률 높은 기본군. 리뉴얼의 핵심. (은은한 파스텔톤이 인기가 좋음)
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <img src="images/figma_color_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_color_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_color_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_color_4.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_color_5.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                </div>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 40px;">
+                <h3 style="font-size: 14px;">Photo</h3>
+                <p style="color: #808080; font-size: 13px; margin: 10px 0 16px;">
+                    자연 풍경 및 계절감 있는 실사 이미지 - 감성 보완용. 사용률 목표는 낮게 잡되 다양성 확보. 계절감을 표현 해도 좋을 듯 (예_하늘색 바탕에 벚꽃 흩날림)
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <img src="images/figma_photo_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_photo_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_photo_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_photo_4.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_photo_5.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                </div>
+            </div>
+
+            <div class="ranking-card" style="margin-top: 40px;">
+                <h3 style="font-size: 14px;">Dark mode</h3>
+                <p style="color: #666; font-size: 13px; margin: 10px 0 16px;">
+                    어두운 배경 - 야간·저조도 대응. 단독 대량 제작보다 고품질 소수 정예. - 야간 사용자 경험 개선 + 배터리 절약 + 트렌드 반영 (예 : 캐릭터 조합 /밤하늘/우주 등)
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <img src="images/figma_dark_1.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_dark_2.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_dark_3.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_dark_4.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                    <img src="images/figma_dark_5.png" style="width: 180px; height: auto; object-fit: cover; border: 1px solid #e5e5e5;">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer">
+        <p style="font-size: 14px; font-weight: 600;">© 2026 LINE Corporation | Main Product Design 2팀</p>
+        <p style="margin-top: 10px;">LINE 채팅방 배경화면 사용 데이터 분석 보고서</p>
+    </div>
+</body>
+</html>
