@@ -17,32 +17,82 @@
             top: 20px;
             right: 20px;
             z-index: 200;
+        }
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-current {
             display: flex;
+            align-items: center;
             gap: 8px;
+            padding: 10px 16px;
             background: white;
-            padding: 8px;
+            border: 2px solid #e5e5e5;
             border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            transition: all 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 1px solid #e5e5e5;
+        .lang-current:hover {
+            border-color: #06C755;
+        }
+        .lang-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .lang-arrow {
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid #666;
+            transition: transform 0.2s;
+        }
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
             background: white;
-            color: #666;
-            cursor: pointer;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
             transition: all 0.2s;
         }
-        .lang-btn:hover {
-            background: #f5f5f5;
+        .lang-dropdown.open .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .lang-option:last-child {
+            border-bottom: none;
+        }
+        .lang-option:hover {
+            background: #f8f8f8;
             color: #1a1a1a;
         }
-        .lang-btn.active {
-            background: #06C755;
-            color: white;
-            border-color: #06C755;
+        .lang-option.active {
+            color: #06C755;
+            background: #f0fdf4;
         }
         .header {
             background: white;
@@ -290,9 +340,21 @@
 </head>
 <body>
     <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="ko">한국어</button>
-        <button class="lang-btn" data-lang="en">English</button>
-        <button class="lang-btn" data-lang="ja">日本語</button>
+        <div class="lang-dropdown">
+            <div class="lang-current">
+                <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span class="lang-label">KR</span>
+                <div class="lang-arrow"></div>
+            </div>
+            <div class="lang-menu">
+                <div class="lang-option active" data-lang="ko" data-label="KR">한국어</div>
+                <div class="lang-option" data-lang="en" data-label="EN">English</div>
+                <div class="lang-option" data-lang="ja" data-label="JA">日本語</div>
+            </div>
+        </div>
     </div>
 
     <div class="header">
@@ -301,21 +363,21 @@
     </div>
 
     <nav class="nav">
-        <a href="#rankings-jan">1월 순위</a>
-        <a href="#rankings-apr">4월 순위</a>
-        <a href="#seasonal">계절적 특성</a>
-        <a href="#regional">나라별 특성</a>
-        <a href="#worst">WORST 20</a>
-        <a href="#insights">핵심 인사이트</a>
-        <a href="#renewal">리뉴얼 목표</a>
-        <a href="#specification">제작 의뢰서</a>
-        <a href="#examples">제안 예시</a>
+        <a href="#rankings-jan" data-i18n="nav.jan">1월 순위</a>
+        <a href="#rankings-apr" data-i18n="nav.apr">4월 순위</a>
+        <a href="#seasonal" data-i18n="nav.seasonal">계절적 특성</a>
+        <a href="#regional" data-i18n="nav.regional">나라별 특성</a>
+        <a href="#worst" data-i18n="nav.worst">WORST 20</a>
+        <a href="#insights" data-i18n="nav.insights">핵심 인사이트</a>
+        <a href="#renewal" data-i18n="nav.renewal">리뉴얼 목표</a>
+        <a href="#specification" data-i18n="nav.specification">제작 의뢰서</a>
+        <a href="#examples" data-i18n="nav.examples">제안 예시</a>
     </nav>
 
     <div class="container">
         <section id="rankings-jan" class="section">
-            <h2 class="section-title">1. 2026년 1월 순위 (겨울)</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section1.title">1. 2026년 1월 순위 (겨울)</h2>
+            <p class="section-description" data-i18n="section1.description">
                 겨울 시즌 배경화면 사용 현황 - 눈 내리는 장면 등 계절감 강한 디자인이 순위권 진입
             </p>
 
@@ -505,8 +567,8 @@
         </section>
 
         <section id="rankings-apr" class="section">
-            <h2 class="section-title">2. 2026년 4월 순위 (봄)</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section2.title">2. 2026년 4월 순위 (봄)</h2>
+            <p class="section-description" data-i18n="section2.description">
                 봄 시즌 배경화면 사용 현황 - 벚꽃 풍경이 급상승하며 계절성 콘텐츠의 명확한 수요 입증
             </p>
 
@@ -696,8 +758,8 @@
         </section>
 
         <section id="seasonal" class="section">
-            <h2 class="section-title">3. 계절적 특성 분석</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section3.title">3. 계절적 특성 분석</h2>
+            <p class="section-description" data-i18n="section3.description">
                 1월(겨울)과 4월(봄)의 순위 변화를 통한 계절별 선호도 패턴 분석
             </p>
 
@@ -738,8 +800,8 @@
         </section>
 
         <section id="regional" class="section">
-            <h2 class="section-title">4. 나라별 특성 분석</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section4.title">4. 나라별 특성 분석</h2>
+            <p class="section-description" data-i18n="section4.description">
                 일본(JP), 태국(TH), 대만(TW) 각 지역별 배경화면 선호도와 특성을 심층 분석
             </p>
 
@@ -810,7 +872,7 @@
         </section>
 
         <section id="worst" class="section">
-            <h2 class="section-title">5. WORST 20 분석 (1월, 4월 합친 순위)</h2>
+            <h2 class="section-title" data-i18n="section5.title">5. WORST 20 분석 (1월, 4월 합친 순위)</h2>
             <div class="insight-box" style="background: #fff3e0; border-left-color: #ff9800;">
                 <h3 style="color: #e65100;">⚠️ 핵심 문제점</h3>
                 <p style="color: #333;">
@@ -969,7 +1031,7 @@
         </section>
 
         <section id="insights" class="section">
-            <h2 class="section-title">6. 종합 인사이트 및 제안</h2>
+            <h2 class="section-title" data-i18n="section6.title">6. 종합 인사이트 및 제안</h2>
             <div class="insight-box">
                 <h3>📊 데이터 기반 결론</h3>
                 <p>
@@ -982,8 +1044,8 @@
         </section>
 
         <section id="renewal" class="section">
-            <h2 class="section-title">7. 2026 LINE 채팅방 배경 리뉴얼 목표</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section7.title">7. 2026 LINE 채팅방 배경 리뉴얼 목표</h2>
+            <p class="section-description" data-i18n="section7.description">
                 사용자가 채팅 맥락에 맞는 배경을 더 쉽게 선택하고, 말풍선 가독성을 해치지 않으면서 감성·개성·야간 사용성을 강화한다.
             </p>
 
@@ -1075,8 +1137,8 @@
         </section>
 
         <section id="specification" class="section">
-            <h2 class="section-title">8. 2026 LINE 채팅방 배경 그래픽 제작 의뢰서</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-i18n="section8.title">8. 2026 LINE 채팅방 배경 그래픽 제작 의뢰서</h2>
+            <p class="section-description" data-i18n="section8.description">
                 사용자가 채팅 맥락에 맞는 배경을 더 쉽게 선택하고, 말풍선 가독성을 해치지 않으면서 감성·개성·야간 사용성을 강화한다.
             </p>
 
@@ -1167,7 +1229,7 @@
         </section>
 
         <section id="examples" class="section">
-            <h2 class="section-title">9. LINE 채팅방 배경 제안 예시 - 카테고리별</h2>
+            <h2 class="section-title" data-i18n="section9.title">9. LINE 채팅방 배경 제안 예시 - 카테고리별</h2>
 
             <div class="ranking-card" style="margin-bottom: 40px;">
                 <h3 style="font-size: 14px;">LINE 채팅방 배경 선택 UI</h3>
@@ -1259,31 +1321,15 @@
         <p style="margin-top: 10px;" data-i18n="footer.description">LINE 채팅방 배경화면 사용 데이터 분석 보고서</p>
     </div>
 
+    <script src="translations.js"></script>
     <script>
-        const translations = {
-            ko: {
-                title: "LINE 채팅방 배경화면 데이터 분석",
-                subtitle: "2026년 1월·4월 실사용 데이터 기반 인사이트",
-                "footer.copyright": "© 2026 LINE Corporation | Main Product Design 2팀",
-                "footer.description": "LINE 채팅방 배경화면 사용 데이터 분석 보고서"
-            },
-            en: {
-                title: "LINE Chatroom Background Data Analysis",
-                subtitle: "Insights Based on Actual Usage Data from January & April 2026",
-                "footer.copyright": "© 2026 LINE Corporation | Main Product Design Team 2",
-                "footer.description": "LINE Chatroom Background Usage Data Analysis Report"
-            },
-            ja: {
-                title: "LINEチャットルーム背景データ分析",
-                subtitle: "2026年1月·4月の実使用データに基づくインサイト",
-                "footer.copyright": "© 2026 LINE Corporation | Main Product Design 2チーム",
-                "footer.description": "LINEチャットルーム背景使用データ分析レポート"
-            }
-        };
-
         let currentLang = 'ko';
+        const dropdown = document.querySelector('.lang-dropdown');
+        const langCurrent = document.querySelector('.lang-current');
+        const langLabel = document.querySelector('.lang-label');
+        const langOptions = document.querySelectorAll('.lang-option');
 
-        function switchLanguage(lang) {
+        function switchLanguage(lang, label) {
             currentLang = lang;
             document.documentElement.lang = lang;
 
@@ -1295,26 +1341,48 @@
                 }
             });
 
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            // Update dropdown label
+            langLabel.textContent = label;
+
+            // Update active option
+            langOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
             });
+
+            // Close dropdown
+            dropdown.classList.remove('open');
 
             // Save preference
             localStorage.setItem('preferredLanguage', lang);
         }
 
-        // Event listeners for language buttons
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchLanguage(btn.getAttribute('data-lang'));
+        // Toggle dropdown
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        });
+
+        // Language option click
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                const label = option.getAttribute('data-label');
+                switchLanguage(lang, label);
             });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('open');
         });
 
         // Load saved language preference
         const savedLang = localStorage.getItem('preferredLanguage');
         if (savedLang && translations[savedLang]) {
-            switchLanguage(savedLang);
+            const savedOption = Array.from(langOptions).find(opt => opt.getAttribute('data-lang') === savedLang);
+            if (savedOption) {
+                switchLanguage(savedLang, savedOption.getAttribute('data-label'));
+            }
         }
     </script>
 </body>
