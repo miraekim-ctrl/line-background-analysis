@@ -12,6 +12,38 @@
             color: #1a1a1a;
             line-height: 1.65;
         }
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 200;
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .lang-btn {
+            padding: 8px 16px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+        .lang-btn.active {
+            background: #06C755;
+            color: white;
+            border-color: #06C755;
+        }
         .header {
             background: white;
             border-bottom: 1px solid #e5e5e5;
@@ -257,9 +289,15 @@
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="ko">한국어</button>
+        <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+    </div>
+
     <div class="header">
-        <h1>LINE 채팅방 배경화면 데이터 분석</h1>
-        <div class="subtitle">2026년 1월·4월 실사용 데이터 기반 인사이트</div>
+        <h1 data-i18n="title">LINE 채팅방 배경화면 데이터 분석</h1>
+        <div class="subtitle" data-i18n="subtitle">2026년 1월·4월 실사용 데이터 기반 인사이트</div>
     </div>
 
     <nav class="nav">
@@ -1217,8 +1255,67 @@
     </div>
 
     <div class="footer">
-        <p style="font-size: 14px; font-weight: 600;">© 2026 LINE Corporation | Main Product Design 2팀</p>
-        <p style="margin-top: 10px;">LINE 채팅방 배경화면 사용 데이터 분석 보고서</p>
+        <p style="font-size: 14px; font-weight: 600;" data-i18n="footer.copyright">© 2026 LINE Corporation | Main Product Design 2팀</p>
+        <p style="margin-top: 10px;" data-i18n="footer.description">LINE 채팅방 배경화면 사용 데이터 분석 보고서</p>
     </div>
+
+    <script>
+        const translations = {
+            ko: {
+                title: "LINE 채팅방 배경화면 데이터 분석",
+                subtitle: "2026년 1월·4월 실사용 데이터 기반 인사이트",
+                "footer.copyright": "© 2026 LINE Corporation | Main Product Design 2팀",
+                "footer.description": "LINE 채팅방 배경화면 사용 데이터 분석 보고서"
+            },
+            en: {
+                title: "LINE Chatroom Background Data Analysis",
+                subtitle: "Insights Based on Actual Usage Data from January & April 2026",
+                "footer.copyright": "© 2026 LINE Corporation | Main Product Design Team 2",
+                "footer.description": "LINE Chatroom Background Usage Data Analysis Report"
+            },
+            ja: {
+                title: "LINEチャットルーム背景データ分析",
+                subtitle: "2026年1月·4月の実使用データに基づくインサイト",
+                "footer.copyright": "© 2026 LINE Corporation | Main Product Design 2チーム",
+                "footer.description": "LINEチャットルーム背景使用データ分析レポート"
+            }
+        };
+
+        let currentLang = 'ko';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Event listeners for language buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang && translations[savedLang]) {
+            switchLanguage(savedLang);
+        }
+    </script>
 </body>
 </html>
