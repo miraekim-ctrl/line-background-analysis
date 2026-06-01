@@ -219,3 +219,62 @@ const translations = {
         "footer.description": "LINEチャットルーム背景使用データ分析レポート"
     }
 };
+
+// Extended translations for sections 5-8
+// Section 5 additions
+translations.ko["section5.problem.title"] = "⚠️ 핵심 문제점";
+translations.ko["section5.problem.text"] = "LINE 유저의 핵심 본질인 'IP(캐릭터) 중심의 소비 성향'과 '메신저 UI 환경'을 고려하지 못한 기획적 미스매치가 원인";
+translations.ko["section5.issue1.title"] = "1. LINE 유저의 핵심 니즈 간과";
+translations.ko["section5.issue1.text"] = "배경을 직접 변경하는 고관여 유저들은 대다수 '라인프렌즈 캐릭터를 보기 위한 목적'이 강함. 캐릭터 요소가 배제되거나 인지도가 낮은 일러스트는 '명분과 매력'이 부족";
+translations.ko["section5.issue2.title"] = "2. 높은 시각적 밀도로 인한 가독성 간섭";
+translations.ko["section5.issue2.text"] = "화면 전체를 채우는 전면 패턴이나 중앙 집중형 대형 그래픽은 말풍선, 텍스트, 키보드와 겹치면서 '가독성과 시인성'을 저해";
+translations.ko["section5.worst.title1"] = "WORST 1-10 (가장 인기 없는 순)";
+translations.ko["section5.worst.title2"] = "WORST 11-20";
+
+// Section 6
+translations.ko["section6.insight.title"] = "📊 데이터 기반 결론";
+translations.ko["section6.insight.text"] = "LINE 채팅방 배경화면은 \"심플함과 캐릭터성의 균형\"이 핵심. 유저들은 메신저 본연의 가독성을 해치지 않으면서도, 자신의 개성과 취향을 표현할 수 있는 배경을 선호. 향후 제작 시 지역별 특성과 계절성을 고려한 맞춤형 전략이 필요하며, 라인프렌즈 IP를 효과적으로 활용하되 UI 가독성을 최우선으로 고려해야 함.";
+
+// Section 7
+translations.ko["section7.strategy.title"] = "1. 전략 키워드";
+translations.ko["section7.category.title"] = "2. 카테고리 개선 제안";
+
+// Section 8
+translations.ko["section8.spec.title"] = "기본 스펙";
+translations.ko["section8.guideline.title"] = "가독성 가이드라인";
+
+translations.en["section5.problem.title"] = "⚠️ Core Issues";
+translations.en["section5.problem.text"] = "Planning mismatch that failed to consider LINE users' core essence of 'IP (character)-centered consumption' and 'messenger UI environment'";
+translations.en["section5.issue1.title"] = "1. Overlooking LINE Users' Core Needs";
+translations.en["section5.issue1.text"] = "High-engagement users who actively change backgrounds primarily want to 'see LINE Friends characters'. Illustrations without characters or with low-recognition elements lack 'rationale and appeal'";
+translations.en["section5.issue2.title"] = "2. Readability Interference from High Visual Density";
+translations.en["section5.issue2.text"] = "Full-screen patterns or center-focused large graphics overlap with chat bubbles, text, and keyboards, compromising 'readability and visibility'";
+translations.en["section5.worst.title1"] = "WORST 1-10 (Least Popular)";
+translations.en["section5.worst.title2"] = "WORST 11-20";
+
+translations.en["section6.insight.title"] = "📊 Data-Driven Conclusion";
+translations.en["section6.insight.text"] = "LINE chatroom backgrounds need \"balance between simplicity and character\". Users prefer backgrounds that express their personality and taste without compromising messenger readability. Future production requires tailored strategies considering regional characteristics and seasonality, effectively utilizing LINE Friends IP while prioritizing UI readability.";
+
+translations.en["section7.strategy.title"] = "1. Strategy Keywords";
+translations.en["section7.category.title"] = "2. Category Improvement Proposal";
+
+translations.en["section8.spec.title"] = "Basic Specifications";
+translations.en["section8.guideline.title"] = "Readability Guidelines";
+
+translations.ja["section5.problem.title"] = "⚠️ 主要問題点";
+translations.ja["section5.problem.text"] = "LINEユーザーの本質である「IP（キャラクター）中心の消費傾向」と「メッセンジャーUI環境」を考慮できなかった企画のミスマッチが原因";
+translations.ja["section5.issue1.title"] = "1. LINEユーザーの主要ニーズの見落とし";
+translations.ja["section5.issue1.text"] = "背景を直接変更する高関与ユーザーの大多数は「LINE Friendsキャラクターを見る目的」が強い。キャラクター要素が除外されたり認知度の低いイラストは「根拠と魅力」が不足";
+translations.ja["section5.issue2.title"] = "2. 高い視覚密度による可読性の妨害";
+translations.ja["section5.issue2.text"] = "画面全体を埋める全面パターンや中央集中型の大型グラフィックは吹き出し、テキスト、キーボードと重なり「可読性と視認性」を低下";
+translations.ja["section5.worst.title1"] = "WORST 1-10（最も人気がない順）";
+translations.ja["section5.worst.title2"] = "WORST 11-20";
+
+translations.ja["section6.insight.title"] = "📊 データに基づく結論";
+translations.ja["section6.insight.text"] = "LINEチャットルーム背景は「シンプルさとキャラクター性のバランス」が核心。ユーザーはメッセンジャー本来の可読性を損なわずに、自分の個性と好みを表現できる背景を好む。今後の制作には地域別特性と季節性を考慮したカスタマイズ戦略が必要で、LINE Friends IPを効果的に活用しつつUI可読性を最優先に考慮すべき。";
+
+translations.ja["section7.strategy.title"] = "1. 戦略キーワード";
+translations.ja["section7.category.title"] = "2. カテゴリー改善提案";
+
+translations.ja["section8.spec.title"] = "基本仕様";
+translations.ja["section8.guideline.title"] = "可読性ガイドライン";
