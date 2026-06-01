@@ -347,3 +347,115 @@ translations.ja["section8.cat3.reason"] = "追加理由：";
 translations.ja["section8.cat3.design"] = "デザイン方向：";
 translations.ja["section8.table.item"] = "項目";
 translations.ja["section8.table.spec"] = "仕様";
+
+// Section 5 - Detailed suggestion points
+translations.ko["section5.point1.title"] = "① [가독성을 배려한 레이아웃 설계]를 최우선으로";
+translations.ko["section5.point1.desc"] = "메신저 UI와의 조화를 고려한 디자인";
+translations.ko["section5.point2.title"] = "② [라인프렌즈 인기 캐릭터 중심의 배치]로 기획 방향 제한";
+translations.ko["section5.point2.desc"] = "IP 매력을 극대화한 전략";
+translations.ko["section5.point3.title"] = "③ 디자인의 시각적 밀도를 한 단계 낮추어 제작";
+translations.ko["section5.point3.desc"] = "과도한 요소 배제, 여백 확보";
+translations.ko["section5.point4.title"] = "④ 단색(Simple) 배경 제작 시 주의사항";
+translations.ko["section5.point4.desc"] = "단색 배경은 명확한 색상 정체성이 필수입니다.";
+translations.ko["section5.recommended.title"] = "✅ 권장: 파스텔 톤 (명도 85% 이상 + 채도 25% 이하)";
+translations.ko["section5.recommended.point1"] = "밝고 부드러운 색감으로 가독성 우수";
+translations.ko["section5.recommended.point2"] = "성공 사례: 연핑크 계열 (TOP 3 진입)";
+translations.ko["section5.avoid.title"] = "❌ 피해야 할 영역: 중간 톤 (명도 60-75% + 채도 20-40%)";
+translations.ko["section5.avoid.point1"] = "밝지도 어둡지도 않은 애매한 톤";
+translations.ko["section5.avoid.point2"] = "탁하고 생기 없어 보이는 느낌";
+translations.ko["section5.avoid.point3"] = "WORST 20 중 6개(30%)가 이 영역에 해당";
+
+// Section 7 - Strategy keywords details
+translations.ko["section7.readable"] = "Readable: 말풍선과 텍스트가 항상 잘 보여야 함";
+translations.ko["section7.calm"] = "Calm: 장시간 채팅해도 피로하지 않은 색감";
+translations.ko["section7.personal"] = "Personal: 사용자가 취향을 표현할 수 있어야 함";
+translations.ko["section7.modeaware"] = "Mode-aware: 라이트/다크 사용 환경 대응";
+translations.ko["section7.improvement"] = "사용자 만족도 향상";
+translations.ko["section7.diversity"] = "배경 사용률 증가 (다양성 확보)";
+
+// Section 8 - Guideline details
+translations.ko["section8.guideline1"] = "Readable: 말풍선과 텍스트가 잘 보여야 함";
+translations.ko["section8.guideline2"] = "Calm: 장시간 채팅해도 피로하지 않은 색감";
+translations.ko["section8.guideline3"] = "Mode-aware: 라이트/다크 사용 환경 대응";
+translations.ko["section8.guideline4"] = "제안: 명도 대비 40% 이상, 채도 70% 이하";
+translations.ko["section8.guideline5"] = "금지: 밝은 흰색, 고대비 패턴, 네온 컬러";
+
+// Section 8 - Dark mode reasons
+translations.ko["section8.dark.reason1"] = "야간 사용 50% (오후 9시~새벽 2시) - 야간 사용자 경험 개선";
+translations.ko["section8.dark.reason2"] = "OLED 배터리 10-15% 절약";
+translations.ko["section8.dark.reason3"] = "iOS/Android 시스템 레벨 Darkmode 지원 - 트렌드 반영";
+translations.ko["section8.dark.reason4"] = "경쟁사 제공 (Whats app)";
+translations.ko["section8.dark.design1"] = "명도 15-30%, 채도 20-40%";
+translations.ko["section8.dark.design2"] = "타입: 라인 캐릭터 5개, 그라데이션 2개, 자연/우주 2개";
+
+translations.en["section5.point1.title"] = "① Prioritize [Readability-Conscious Layout Design]";
+translations.en["section5.point1.desc"] = "Design considering harmony with messenger UI";
+translations.en["section5.point2.title"] = "② Limit Planning Direction to [LINE Friends Popular Character-Centered Placement]";
+translations.en["section5.point2.desc"] = "Strategy maximizing IP appeal";
+translations.en["section5.point3.title"] = "③ Reduce Visual Density by One Level";
+translations.en["section5.point3.desc"] = "Eliminate excessive elements, secure whitespace";
+translations.en["section5.point4.title"] = "④ Precautions for Monochrome (Simple) Background Production";
+translations.en["section5.point4.desc"] = "Monochrome backgrounds require clear color identity.";
+translations.en["section5.recommended.title"] = "✅ Recommended: Pastel Tones (Lightness 85%+ & Saturation 25%-)";
+translations.en["section5.recommended.point1"] = "Excellent readability with bright, soft colors";
+translations.en["section5.recommended.point2"] = "Success case: Light pink series (TOP 3)";
+translations.en["section5.avoid.title"] = "❌ Avoid: Mid-tones (Lightness 60-75% & Saturation 20-40%)";
+translations.en["section5.avoid.point1"] = "Ambiguous tones neither bright nor dark";
+translations.en["section5.avoid.point2"] = "Dull and lifeless appearance";
+translations.en["section5.avoid.point3"] = "6 of WORST 20 (30%) fall in this range";
+
+translations.en["section7.readable"] = "Readable: Chat bubbles and text must always be visible";
+translations.en["section7.calm"] = "Calm: Colors that don't cause fatigue during long chats";
+translations.en["section7.personal"] = "Personal: Users should be able to express their taste";
+translations.en["section7.modeaware"] = "Mode-aware: Adapt to light/dark usage environments";
+translations.en["section7.improvement"] = "Improve user satisfaction";
+translations.en["section7.diversity"] = "Increase background usage (ensure diversity)";
+
+translations.en["section8.guideline1"] = "Readable: Chat bubbles and text must be visible";
+translations.en["section8.guideline2"] = "Calm: Colors that don't cause fatigue during long chats";
+translations.en["section8.guideline3"] = "Mode-aware: Adapt to light/dark usage environments";
+translations.en["section8.guideline4"] = "Suggestion: Lightness contrast 40%+, saturation 70%-";
+translations.en["section8.guideline5"] = "Prohibited: Bright white, high-contrast patterns, neon colors";
+
+translations.en["section8.dark.reason1"] = "50% night usage (9PM-2AM) - Improve night user experience";
+translations.en["section8.dark.reason2"] = "Save 10-15% OLED battery";
+translations.en["section8.dark.reason3"] = "iOS/Android system-level Dark mode support - Follow trends";
+translations.en["section8.dark.reason4"] = "Competitors provide it (WhatsApp)";
+translations.en["section8.dark.design1"] = "Lightness 15-30%, saturation 20-40%";
+translations.en["section8.dark.design2"] = "Types: 5 LINE characters, 2 gradients, 2 nature/space";
+
+translations.ja["section5.point1.title"] = "① [可読性を配慮したレイアウト設計]を最優先";
+translations.ja["section5.point1.desc"] = "メッセンジャーUIとの調和を考慮したデザイン";
+translations.ja["section5.point2.title"] = "② [LINE Friends人気キャラクター中心の配置]で企画方向を制限";
+translations.ja["section5.point2.desc"] = "IP魅力を最大化した戦略";
+translations.ja["section5.point3.title"] = "③ デザインの視覚密度を一段階下げて制作";
+translations.ja["section5.point3.desc"] = "過度な要素排除、余白確保";
+translations.ja["section5.point4.title"] = "④ 単色（Simple）背景制作時の注意事項";
+translations.ja["section5.point4.desc"] = "単色背景は明確な色彩アイデンティティが必須です。";
+translations.ja["section5.recommended.title"] = "✅ 推奨：パステルトーン（明度85%以上＋彩度25%以下）";
+translations.ja["section5.recommended.point1"] = "明るく柔らかい色合いで可読性優秀";
+translations.ja["section5.recommended.point2"] = "成功事例：淡いピンク系（TOP 3入り）";
+translations.ja["section5.avoid.title"] = "❌ 避けるべき領域：中間トーン（明度60-75%＋彩度20-40%）";
+translations.ja["section5.avoid.point1"] = "明るくも暗くもない曖昧なトーン";
+translations.ja["section5.avoid.point2"] = "濁って生気がない印象";
+translations.ja["section5.avoid.point3"] = "WORST 20のうち6個（30%）がこの領域に該当";
+
+translations.ja["section7.readable"] = "Readable：吹き出しとテキストが常によく見えること";
+translations.ja["section7.calm"] = "Calm：長時間チャットしても疲れない色合い";
+translations.ja["section7.personal"] = "Personal：ユーザーが好みを表現できること";
+translations.ja["section7.modeaware"] = "Mode-aware：ライト/ダーク使用環境対応";
+translations.ja["section7.improvement"] = "ユーザー満足度向上";
+translations.ja["section7.diversity"] = "背景使用率増加（多様性確保）";
+
+translations.ja["section8.guideline1"] = "Readable：吹き出しとテキストがよく見えること";
+translations.ja["section8.guideline2"] = "Calm：長時間チャットしても疲れない色合い";
+translations.ja["section8.guideline3"] = "Mode-aware：ライト/ダーク使用環境対応";
+translations.ja["section8.guideline4"] = "提案：明度対比40%以上、彩度70%以下";
+translations.ja["section8.guideline5"] = "禁止：明るい白色、高コントラストパターン、ネオンカラー";
+
+translations.ja["section8.dark.reason1"] = "夜間使用50%（午後9時〜午前2時）- 夜間ユーザー体験改善";
+translations.ja["section8.dark.reason2"] = "OLEDバッテリー10-15%節約";
+translations.ja["section8.dark.reason3"] = "iOS/Androidシステムレベルダークモード対応 - トレンド反映";
+translations.ja["section8.dark.reason4"] = "競合他社提供（WhatsApp）";
+translations.ja["section8.dark.design1"] = "明度15-30%、彩度20-40%";
+translations.ja["section8.dark.design2"] = "タイプ：LINEキャラクター5個、グラデーション2個、自然/宇宙2個";
