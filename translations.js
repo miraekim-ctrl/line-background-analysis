@@ -278,3 +278,72 @@ translations.ja["section7.category.title"] = "2. カテゴリー改善提案";
 
 translations.ja["section8.spec.title"] = "基本仕様";
 translations.ja["section8.guideline.title"] = "可読性ガイドライン";
+
+// Additional section 5 content
+translations.ko["section5.suggestion.title"] = "✅ 그래픽팀 제안 방향성";
+translations.ko["section5.suggestion.intro"] = "유저들은 '확실한 캐릭터성' 혹은 'UI를 방해하지 않는 확실한 미니멀함' 중 하나를 선택하는 경향이 뚜렷";
+
+translations.en["section5.suggestion.title"] = "✅ Graphic Team Proposal Direction";
+translations.en["section5.suggestion.intro"] = "Users show clear tendency to choose either 'definite character presence' or 'definite minimalism that doesn't interfere with UI'";
+
+translations.ja["section5.suggestion.title"] = "✅ グラフィックチーム提案方向性";
+translations.ja["section5.suggestion.intro"] = "ユーザーは「確実なキャラクター性」または「UIを妨げない確実なミニマリズム」のいずれかを選択する傾向が明確";
+
+// Section 7 additional
+translations.ko["section7.before.title"] = "Before: 현재 구조 (3개)";
+translations.ko["section7.after.title"] = "After: 개선안 (4-5개)";
+translations.ko["section7.table.category"] = "카테고리";
+translations.ko["section7.table.count"] = "개수";
+translations.ko["section7.table.description"] = "설명";
+translations.ko["section7.table.status"] = "상태";
+
+translations.en["section7.before.title"] = "Before: Current Structure (3 types)";
+translations.en["section7.after.title"] = "After: Improvement Plan (4-5 types)";
+translations.en["section7.table.category"] = "Category";
+translations.en["section7.table.count"] = "Count";
+translations.en["section7.table.description"] = "Description";
+translations.en["section7.table.status"] = "Status";
+
+translations.ja["section7.before.title"] = "Before: 現在の構造（3種類）";
+translations.ja["section7.after.title"] = "After: 改善案（4-5種類）";
+translations.ja["section7.table.category"] = "カテゴリー";
+translations.ja["section7.table.count"] = "個数";
+translations.ja["section7.table.description"] = "説明";
+translations.ja["section7.table.status"] = "状態";
+
+// Section 8 additional
+translations.ko["section8.cat1.title"] = "Category 1: Illustrations & Character (14개)";
+translations.ko["section8.cat1.desc"] = "LINE 공식 캐릭터를 활용한 배경 - LINE 정체성 강화. 캐릭터팬용이지만 가독성을 고려하는 것이 필요. 파스텔톤+라인캐릭터조합이 핵심";
+translations.ko["section8.cat1_1.title"] = "Category 1_1: Photos (5-6개)";
+translations.ko["section8.cat1_1.desc"] = "자연 풍경 및 계절감 있는 실사 이미지 - 감성 보완용. 사용률 목표는 낮게 잡되 다양성 확보. 블러 처리 필수";
+translations.ko["section8.cat2.title"] = "Category 2: Colors & Gradient (21개)";
+translations.ko["section8.cat2.desc"] = "깔끔한 단색 및 부드러운 그라데이션 배경 / JP에서 가장 실사용률 높은 기본군. 리뉴얼의 핵심. (은은한 파스텔톤이 인기가 좋음)\n단색 + 은은한 텍스처 (10) / 부드러운 컬러 전환 (8)";
+translations.ko["section8.cat3.title"] = "Category 3: Dark (9개)";
+translations.ko["section8.cat3.reason"] = "추가 이유:";
+translations.ko["section8.cat3.design"] = "디자인 방향:";
+translations.ko["section8.table.item"] = "항목";
+translations.ko["section8.table.spec"] = "사양";
+
+translations.en["section8.cat1.title"] = "Category 1: Illustrations & Character (14 items)";
+translations.en["section8.cat1.desc"] = "Backgrounds featuring official LINE characters - Strengthen LINE identity. For character fans but readability consideration needed. Key: pastel tone + LINE character combination";
+translations.en["section8.cat1_1.title"] = "Category 1_1: Photos (5-6 items)";
+translations.en["section8.cat1_1.desc"] = "Natural landscapes and seasonal photos - Emotional complement. Keep usage goals low but ensure diversity. Blur processing required";
+translations.en["section8.cat2.title"] = "Category 2: Colors & Gradient (21 items)";
+translations.en["section8.cat2.desc"] = "Clean monochrome and soft gradient backgrounds / Most used basic group in JP. Core of renewal. (Soft pastel tones popular)\nMonochrome + subtle texture (10) / Smooth color transitions (8)";
+translations.en["section8.cat3.title"] = "Category 3: Dark (9 items)";
+translations.en["section8.cat3.reason"] = "Reasons for Addition:";
+translations.en["section8.cat3.design"] = "Design Direction:";
+translations.en["section8.table.item"] = "Item";
+translations.en["section8.table.spec"] = "Specification";
+
+translations.ja["section8.cat1.title"] = "Category 1: Illustrations & Character（14個）";
+translations.ja["section8.cat1.desc"] = "LINE公式キャラクターを活用した背景 - LINEアイデンティティ強化。キャラクターファン向けですが可読性の考慮が必要。鍵：パステルトーン+LINEキャラクター組み合わせ";
+translations.ja["section8.cat1_1.title"] = "Category 1_1: Photos（5-6個）";
+translations.ja["section8.cat1_1.desc"] = "自然風景と季節感のある実写画像 - 感性補完用。使用率目標は低く設定し多様性確保。ブラー処理必須";
+translations.ja["section8.cat2.title"] = "Category 2: Colors & Gradient（21個）";
+translations.ja["section8.cat2.desc"] = "クリーンな単色と柔らかいグラデーション背景 / JPで最も実使用率の高い基本群。リニューアルの核心。（穏やかなパステルトーンが人気）\n単色 + 穏やかなテクスチャ（10）/ 柔らかい色の移り変わり（8）";
+translations.ja["section8.cat3.title"] = "Category 3: Dark（9個）";
+translations.ja["section8.cat3.reason"] = "追加理由：";
+translations.ja["section8.cat3.design"] = "デザイン方向：";
+translations.ja["section8.table.item"] = "項目";
+translations.ja["section8.table.spec"] = "仕様";
